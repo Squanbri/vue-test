@@ -17,15 +17,25 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
+
+  styleResources: {
+    scss: ['~/assets/scss/*.scss']
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/vee-validate.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: {
+    dirs: [
+      '~/components',
+      '~/components/forms',
+      '~/components/products'
+    ]
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -34,15 +44,23 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/style-resources'
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['vee-validate'],
     loaders: {
       cssModules: {
         modules: {
           localIdentName: '[local]_[hash:base64:8]'
         }
+      }
+    },
+    postcss: {
+      plugins: {
+        'postcss-import': true
       }
     }
   }
