@@ -31,11 +31,13 @@
       required
     />
 
-    <my-button>Добавить товар</my-button>
+    <my-button :onClick="onAddProduct">Добавить товар</my-button>
   </form>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data() {
     return {
@@ -44,6 +46,20 @@ export default {
       imageUrl: '',
       price: ''
     }
+  },
+  methods: {
+    onAddProduct () {
+      this.addProduct({
+        id: Date.now(),
+        image: this.image,
+        name: this.name,
+        description: this.description,
+        price: this.price
+      })
+    },
+    ...mapMutations({
+      addProduct: 'products/addProduct'
+    })
   }
 }
 </script>

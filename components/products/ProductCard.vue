@@ -4,32 +4,49 @@
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <img :class="$style.image" src="~/assets/images/product_image_default.png">
+    <img
+      :class="$style.image"
+      :src="product.image"
+    >
 
     <div :class="$style.info">
-      <span :class="$style.title">Наименование товара</span>
+      <span :class="$style.title">{{ product.name }}</span>
 
       <p :class="$style.description">
-        Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк
+        {{ product.description }}
       </p>
 
-      <span :class="$style.price">10 000 руб.</span>
+      <span :class="$style.price">{{ product.price }} руб.</span>
     </div>
 
     <button
       v-if="isHover"
       :class="$style.delete"
+      @click="removeProduct(product.id)"
     />
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'MyTextarea',
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       isHover: false
     }
+  },
+  methods: {
+    ...mapMutations({
+      removeProduct: 'products/removeProduct'
+    })
   }
 }
 </script>
@@ -70,6 +87,11 @@ export default {
     color: $c_black;
     height: 80px;
     margin: 16px 0 32px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4; // количество строк
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .price {

@@ -2,6 +2,7 @@
   <button
     :type="type"
     :class="$style.button"
+    @click="onClick"
   >
     <slot />
   </button>
@@ -17,7 +18,8 @@ export default {
     },
     // eslint-disable-next-line vue/require-default-prop
     onClick: {
-      type: Function
+      type: Function,
+      required: true
     }
   }
 }
