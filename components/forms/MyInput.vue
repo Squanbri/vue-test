@@ -25,7 +25,7 @@ export default {
       required: true
     },
     value: {
-      type: String,
+      type: [String, Number],
       required: true
     },
     placeholder: {
@@ -40,6 +40,7 @@ export default {
   methods: {
     onInput(event) {
       this.$emit('input', event.target.value)
+      this.$emit('keyup', event.target.value)
     }
   }
 }
@@ -57,7 +58,6 @@ export default {
     .input {
       height: 36px;
 
-      color: $c_grey;
       font-size: 12px;
       line-height: 15px;
 

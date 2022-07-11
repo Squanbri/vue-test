@@ -1,7 +1,7 @@
 <template>
   <button
     :type="type"
-    :class="$style.button"
+    :class="buttonClasses"
     @click="onClick"
   >
     <slot />
@@ -16,10 +16,21 @@ export default {
       type: String,
       default: 'button'
     },
-    // eslint-disable-next-line vue/require-default-prop
     onClick: {
       type: Function,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    buttonClasses() {
+      return {
+        [this.$style.disabled]: this.disabled,
+        [this.$style.button]: true
+      }
     }
   }
 }
@@ -38,5 +49,10 @@ export default {
     background-color: $c_green;
 
     cursor: pointer;
+
+    &.disabled {
+      background-color: $c_muted;
+      pointer-events: none;
+    }
   }
 </style>

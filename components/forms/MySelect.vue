@@ -62,7 +62,7 @@ export default {
     onSelect(option) {
       this.selected = option
       this.open = false
-      this.$emit('input', option)
+      this.$emit('change', option)
     }
   }
 }
@@ -72,7 +72,7 @@ export default {
   .wrapper {
     position: relative;
     width: fit-content;
-    min-width: 100px;
+    min-width: 160px;
     height: 36px;
 
     background: $c_white;

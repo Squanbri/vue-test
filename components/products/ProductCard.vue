@@ -7,6 +7,7 @@
     <img
       :class="$style.image"
       :src="product.image"
+      @error="onErrorDownloadImage"
     >
 
     <div :class="$style.info">
@@ -16,7 +17,7 @@
         {{ product.description }}
       </p>
 
-      <span :class="$style.price">{{ product.price }} руб.</span>
+      <span :class="$style.price">{{ Number(product.price).toLocaleString() }} руб.</span>
     </div>
 
     <button
@@ -44,6 +45,9 @@ export default {
     }
   },
   methods: {
+    onErrorDownloadImage(event) {
+      event.target.src = require('~/assets/images/product_image_default.png')
+    },
     ...mapMutations({
       removeProduct: 'products/removeProduct'
     })
@@ -68,10 +72,13 @@ export default {
   .image {
     width: 100%;
     height: 200px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 
   .info {
-    padding: 16px;
+    margin: 16px;
+    overflow: hidden;
   }
 
   .title {
@@ -79,6 +86,7 @@ export default {
     font-size: 20px;
     line-height: 25px;
     color: $c_black;
+    overflow: hidden;
   }
 
   .description {
@@ -99,6 +107,7 @@ export default {
     font-size: 24px;
     line-height: 30px;
     color: $c_black;
+    overflow: hidden;
   }
 
   .delete {
