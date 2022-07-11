@@ -6,15 +6,26 @@
       <product-form />
 
       <div :class="$style.products">
-        <product-card v-for="(item, index) in 10" :key="index" />
+        <product-card
+          v-for="(product, index) in products"
+          :key="index"
+          :product="product"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  computed: {
+    ...mapGetters({
+      products: 'products/getProducts'
+    })
+  }
 }
 </script>
 
