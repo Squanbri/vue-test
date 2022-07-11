@@ -57,7 +57,6 @@ export default {
     .textarea {
       height: 108px;
 
-      color: $c_grey;
       font-size: 12px;
       line-height: 15px;
 
